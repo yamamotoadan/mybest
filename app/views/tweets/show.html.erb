@@ -1,0 +1,27 @@
+<h1>MYBEST</h1>
+<h3>Tweet詳細</h3>
+<div class="tweet">
+  <p><%= @tweet.body %></p>
+  <p><%= @tweet.created_at %></p>
+  <% if user_signed_in? %>
+  <% if current_user.already_liked?(@tweet) %>
+    <%= link_to tweet_like_path(@tweet), method: :delete do %>
+      <p>いいねを取り消す</p><%= @tweet.likes.count %>
+    <% end %>
+  <% else %>
+    <%= link_to tweet_likes_path(@tweet), method: :post do %>
+      <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+     
+    <% end %>
+  <% end %>
+<% else %>
+  <i class="far fa-heart"></i><%= @tweet.likes.count %>
+<% end %>
+</div>
+<%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+<h2>いいねしたユーザー</h2>
+<% @tweet.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+<%= link_to "Tweet一覧に戻る", tweets_path %>
+end
