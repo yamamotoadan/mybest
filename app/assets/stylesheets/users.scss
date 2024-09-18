@@ -1,3 +1,72 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.maipeji{
+    margin-top:130px;
+}
+
+.maipejinotaitoru{
+    font-size:40px;
+    display: flex;
+    justify-content: center; 
+}
+
+.second-block-mypage{
+    padding-top:100px;
+    background-image: url('siro2.jpg');
+    padding-bottom:50px;
+}
+
+.yuzaname{
+    font-size:50px;
+    display: flex;
+    justify-content: center; /* 水平方向中央揃え */
+    align-items: center; /* 垂直方向中央揃え */ 
+    
+}
+.yuzaname2{
+    font-size:50px;
+    text-align: center;
+    
+}
+
+.hennsyuuroguoutiine{
+    display: flex;
+    margin-top:100px;
+    font-size:25px;
+    justify-content: center;
+}
+
+.item {
+    width: calc(25% - 10px); /* 要素の幅を均等に設定（マージンの分を引く） */
+    margin: 0 5px; /* 要素の間にスペースを追加 */
+    text-align:center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size:60px;
+}
+
+.item p{
+    font-size:30px;
+}
+
+.aaa {
+    padding: 1em 1.5em;
+    margin: 2em 0;
+    background-color:#ffffe0;/*背景色*/
+    border: dotted 6px #ffe963;/*線*/
+    color:#000000;/*文字色*/
+    width: 450px;
+    margin-right: 48px;
+    margin-left: 48px;
+}
+
+.aaa p {
+    margin: 0; 
+    padding: 0;
+}
+
+.iinesitaitiran{
+    display: flex;
+    flex-wrap: wrap;
+}

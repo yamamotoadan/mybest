@@ -1,0 +1,53 @@
+<div class="iine-zentai">
+    <div class="iine-top">
+        <h2>ユーザーがいいねした投稿一覧</h2>
+        <h3><%= link_to "マイページトップへ", user_path(current_user.id) %></h3>
+    </div>
+
+    <div class="iinesitaitiran">
+        <% @user.liked_tweets.each do |t| %>
+            <div class="aaa" >
+            
+    
+            <div class="post">
+            
+            <div class="youso-info">
+            <div class="toukougazou">
+            <%= image_tag t.image_url, size: "250x200" if t.image? %>
+            <%=  video_tag t.video_url ,:controls => true, size: "300x250" if t.video?%>
+            </div>
+            <br>
+            <h2>タイトル：<%= t.title %></h2>
+            <br>
+            <h2>内容：<%= t.body %></h2>
+            <br>
+
+            <div class="kensaku-like">
+                <% if user_signed_in? %>
+                <% if current_user.already_liked?(t) %>
+                    <%= link_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
+                    <i class="fas fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% else %>
+                    <%= link_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
+                    <i class="far fa-heart"></i><%= t.likes.count %>
+                    <% end %>
+                <% end %>
+                <% else %>
+                <i class="far fa-heart"></i><%= t.likes.count %>
+                <% end %>
+            </div>
+            </div>
+                </div>
+                <% if user_signed_in? && current_user.id == t.user_id %>
+                    <%= button_to "削除", tweet_path(t.id), method: :delete %>
+                <%end%>
+                <br>
+                <%= link_to "この投稿へ", tweets_path(id: t.id) %>
+
+        </div>
+        <% end %>
+    </div>
+    </div>
+</div>
+</div>

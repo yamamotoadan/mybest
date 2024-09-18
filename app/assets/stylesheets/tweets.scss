@@ -1,3 +1,154 @@
 // Place all the styles related to the tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.tweet-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 80vh;
+}
+
+.tweet-navigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+}
+
+.prev-button {
+    left: 10%;
+    position: absolute;
+}
+
+.next-button {
+    right: 10%;
+    position: absolute;
+}
+
+.tweet-content {
+    text-align: center;
+}
+.tweet-user a{
+    text-decoration: none;
+    color: black;
+}
+
+.tweet-image {
+    
+}
+
+.tweet-user {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.tweet-info {
+    margin-top: 10px;
+}
+
+.tweet-date, .tweet-title, .tweet-likes {
+    margin-top: 5px;
+}
+
+.comment-wrapper{
+    margin-left: 500px;
+}
+.tweet-user img{
+    border-radius: 50%;
+    margin-right:10px;
+}
+
+.tweet-user{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.photo-frame {
+    position: relative; /* 親要素を相対配置に設定 */
+    width: 250px; /* 画像や動画のサイズに合わせて調整 */
+    height: 200px;
+    margin: 20px;
+}
+
+.pin {
+    position: relative;
+    top: 0; /* 画像の左上に配置 */
+    left: 0;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 50px;
+    transform: rotate(-15deg); /* シールを少し傾ける */
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 80px;
+    margin-top: 15px;
+    z-index: 99;
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.zentai{
+    background-image: url('siro2.jpg');
+}
+
+.photo { position: relative; z-index: 10; }
+
+/* Image styles */
+.photo img { max-width: 100%; vertical-align: bottom; border: 10px solid #fff; border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* photos creted by the use of generated content */
+.photo:before, .photo:after { content: ""; border-radius: 3px; width: 100%; height: 100%; position: absolute; border: 10px solid #fff; left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-transition: 0.3s all ease-out;
+    -moz-transition: 0.3s all ease-out;
+    transition: 0.3s all ease-out;
+}
+.photo:before { top: 4px; z-index: -10; } /* 1st element in photo (behind image) */
+.photo:after { top: 8px; z-index: -20; } /* 2nd element in photo (behind image) */
+
+/* Third stack example (One stack element rotated in the opposite direction) */
+.photo.twisted:before {
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    transform: rotate(4deg);
+}
+.photo.twisted:after {
+    -webkit-transform: rotate(-4deg);
+    -moz-transform: rotate(-4deg);
+    transform: rotate(-4deg);
+}
+
+.photo.rotated-left:after {
+    -webkit-transform-origin: bottom left;
+    -moz-transform-origin: bottom left;
+    transform-origin: bottom left;
+    -webkit-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+    transform: rotate(-6deg);
+}
+
+.tweet-likes a{
+    color: red;
+}

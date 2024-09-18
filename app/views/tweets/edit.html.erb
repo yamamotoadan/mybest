@@ -1,5 +1,15 @@
 <%= form_for @tweet do |f| %>
-    <%= f.label :body %>
-    <%= f.text_field :body, :size => 140 %> 
+   <div class="field">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title, :size => 30 %>
+  </div>
+ <div class="field">
+  <%= f.label :詳細 %>
+  <%= f.text_field :body, :size => 30 %>
+</div>
+<div class="field">
+    <%= f.label :画像 %>
+    <%= f.file_field :image %>
+  </div>
     <%= f.submit "編集する" %>
   <% end %>

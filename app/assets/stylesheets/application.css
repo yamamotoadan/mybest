@@ -13,3 +13,93 @@
  *= require_tree .
  *= require_self
  */
+ * {
+    padding: 0;
+    margin: 0;
+}
+header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    background-color:#ffe963;
+}
+.header-list{
+}
+li{
+    list-style: none;
+    margin-left: 250px;
+}
+
+header h1{
+    
+    font-style: normal;
+    margin-left: 550px;
+    width: 300px;
+}
+
+header a{
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+    color:black
+}
+header h1{
+    color: black;
+    margin-bottom: 5px;
+    text-decoration: none;
+    position: relative;
+    display: inh1ne-block;
+    transition: transform 0.3s ease; /* アニメーションを設定 */
+}
+
+header h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* リンクの下に */
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.3s ease; /* 幅のアニメーション */
+}
+
+header h1:hover {
+    color: #000;
+    transform: scale(1.1); /* 文字が少し大きくなる */
+}
+
+
+
+
+/* ここからli */
+header li a {
+    color: black;
+    margin-bottom: 5px;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease; /* アニメーションを設定 */
+}
+
+header li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* リンクの下に */
+    width: 0;
+    height: 2px;
+    background-color: #551A8B;
+    transition: width 0.3s ease; /* 幅のアニメーション */
+}
+
+header li a:hover {
+    color: #551A8B;
+    transform: scale(1.1); /* 文字が少し大きくなる */
+}
+
+header li a:hover::after {
+    width: 100%; /* 下線が左から右に広がる */
+}
+
+

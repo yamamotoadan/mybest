@@ -14,6 +14,9 @@
 <div class="field">
     <%= f.label :画像 %>
     <%= f.file_field :image %>
+    <br>
+    <%= f.label :動画 %>
+      <%= f.file_field :video %>
   </div>
 <%= f.submit "投稿する" %>
 <%= link_to "一覧に戻る", tweets_path %>

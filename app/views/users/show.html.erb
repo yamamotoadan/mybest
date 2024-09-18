@@ -1,26 +1,55 @@
-<h1>users#show</h1>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
 
-<% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
-<% end %>
 
-<h2>ユーザーの投稿一覧</h2>
-<% @user.tweets.each do |t| %>
-  <%= t.user.name %>
-  <%= t.body %>
-<% end %>
+<div class="second-block-mypage">
 
-<!-- 以下はいいね機能を実装している場合-->
-<h2>ユーザーがいいねした投稿一覧</h2>
-<% @user.liked_tweets.each do |t| %>
-  <%= t.user.name %>
-  <%= t.body %>
-<% end %>
-<!-- ここまで-->
 
-<%= image_tag @user.image_url, size: "250x200" if @user.image? %>
+    
+    <div class="yuzaname2">
+        <%= @user.name %>さん</p>
+        <br>
+        <p>ひとこと: <%= @user.profile %></p>
+    </div>
+    
+    <div class="hennsyuuroguoutiine">
+        <% if current_user.id == @user.id %>
+            <div class="item">
+                <%= link_to edit_user_registration_path, class: "btn btn btn-secondary text-white", method: :get do %>
+                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                <% end %>
+                <br>
+                <p>編集する</p>
+            </div>
+        <% end %>
 
-<%= link_to "Tweet一覧に戻る", tweets_path %>
+        <% if user_signed_in? %>
+            <% if current_user.id == @user.id %>
+            <div class="item">
+                <%= link_to destroy_user_session_path, class: "btn btn btn-secondary text-white", method: :delete do %>
+                    <i class="fa-solid fa-door-open" style="color: #8b4513;"></i>
+                <%end%>
+                <br>
+                <p>ログアウト</p>
+            </div>
+            <% end %>
+        <% else %>
+            <%= link_to "新規登録", new_user_registration_path %></li>
+            <%= link_to "ログイン", new_user_session_path %></li>
+        <% end %></h1>
+
+        <div class="item">
+            <%= link_to :controller => "users", :action => "iine", class: "btn btn btn-secondary text-white", method: :get do %>
+                <i class="fa-solid fa-heart-circle-plus" style="color: #ff00ff;"></i>
+            <% end %>
+            <br>
+            <p>いいね履歴</p>
+        </div>
+
+        <div class="item">
+            <%= link_to tweets_path, class: "btn btn btn-secondary text-white", method: :get do %>
+                <i class="fa-solid fa-rotate-left" style="color: #0000ff;"></i>
+            <% end %>
+            <br>
+            <p>トップページに戻る</p>
+        </div>
+    </div>
+</div>

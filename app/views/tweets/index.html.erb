@@ -1,38 +1,99 @@
-<div class="tweets-container">
-<%= link_to "新規投稿",  new_tweet_path %>
-<% if user_signed_in? %>
-  <%= link_to "マイページへ", user_path(current_user.id) %>
-<% end %>
-  <% @tweets.each do |t| %>
-     <%= image_tag t.user.image_url, size: "250x200" if t.user.image? %>
-    <div class="tweet">
-     <%= image_tag t.image_url, size: "250x200" if t.image? %>
-    投稿者： <%= t.user.name %>
-    <br>
-      タイトル：<%= t.title %>
+<div class="zentai">
+<div class="tweet-container">
+  <% if @tweet %>
+    <!-- PREVリンク -->
+    <%= link_to "PREV", prev_tweet_path(@tweet.id), class: "tweet-navigation prev-button" %>
+
+    <!-- 投稿内容の表示 -->
+    <div class="tweet-content">
+      <!-- 投稿者名 -->
+      <div class="tweet-user">
+        <% if !@tweet.user.image? %>
+          <%= image_tag "defo.jpg" ,size: "50x50" %> <%= link_to @tweet.user.name, user_path(@tweet.user.id) %>
+        <% else %>  
+          <%= image_tag @tweet.user.image_url, size: "50x50" if @tweet.user.image? %>  <%= link_to @tweet.user.name, user_path(@tweet.user.id) %>
+        <% end %>
+      </div>
+
+      <!-- 画像の表示 -->
+      <div class="photo-frame.pos2">
+        <div class="pin">MYBEST</div>
+        <div class="photo twisted">
+          <%= image_tag @tweet.image_url, size: "250x200" if @tweet.image? %>
+          <%=  video_tag @tweet.video_url ,:controls => true, size: "250x200" if @tweet.video?%>
+        </div>
+      </div>
+
+      <!-- タイトル、いいね数、作成日 -->
+      <div class="tweet-info">
       <br>
-      本文：<%= t.body %>
-      <br>
-      <% if user_signed_in? %>
-      いいね数
-      <% if current_user.already_liked?(t) %>
-          <%= link_to  tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
-              <i class="far fa-heart"></i><%= t.likes.count %>
+        <div class="tweet-title">
+          タイトル: <%= @tweet.title %>
+        </div>
+        <div class="tweet-title">
+          詳細: <%= @tweet.body %>
+        </div>
+        <div class="tweet-likes">
+          <% if user_signed_in? %>
+            <% if current_user.already_liked?(@tweet) %>
+                <%= link_to tweet_like_path(id: @tweet.id, tweet_id: @tweet.id), method: :delete do %>
+                    <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+                <% end %>
+            <% else %>
+              <%= link_to tweet_likes_path(id: @tweet.id, tweet_id: @tweet.id), method: :post do %>
+                <i class="far fa-heart"></i><%= @tweet.likes.count %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <i class="fas fa-heart"></i><%= @tweet.likes.count %>
           <% end %>
-      <% else %>
-          <%= link_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
-               <i class="fas fa-heart"></i><%= t.likes.count %>
-          <% end %>
-      <% end %>
-  <% else %>
-      <i class="far fa-heart"></i><%= t.likes.count %>
-  <% end %>
-      <%= t.created_at %>
-      <%= link_to "詳細へ", tweet_path(t.id) %>
-      <% if user_signed_in? && current_user.id == t.user_id %>
-      <%= link_to "編集する", edit_tweet_path(t.id) %>
-      <%= link_to "削除する", tweet_path(t.id), method: :delete %>
-    <% end %> 
+        </div>
+        <div class="tweet-date">
+          投稿日: <%= @tweet.created_at.strftime("%Y-%m-%d") %>
+        </div>
+      </div>
+      <% if user_signed_in? && current_user.id == @tweet.user_id %>
+        <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+        <%= link_to "削除する", tweet_path(@tweet.id), method: :delete %>
+      <% end %> 
     </div>
+    <!-- NEXTリンク -->
+    <%= link_to "NEXT", next_tweet_path(@tweet.id), class: "tweet-navigation next-button" %>
+  <% else %>
+    <p>投稿がありません。</p>
   <% end %>
+</div>
+<div class="comment-wrapper">
+<% if user_signed_in? %>
+    <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+  <% unless user_signed_in? %>
+    <h3>コメントはログインすると閲覧・投稿ができます</h3>
+  <% else %>
+    <h3>コメント一覧</h3>
+  <% end %>
+  <% @comments.each do |c| %>
+    <div class="tweet-user">
+      <% if !c.user.image? %>
+        <%= image_tag "defo.jpg" ,size: "50x50" %><br><%= link_to c.user.name, user_path(c.user.id) unless c.user.blank? %>
+      <% else %>  
+        <%= image_tag c.user.image_url, size: "40x40" if c.user.image? %><br><%= link_to c.user.name, user_path(c.user.id) unless c.user.blank? %>
+      <% end %>
+      <br>
+      <br>
+    </div>
+    
+    &nbsp;&nbsp;<%= c.content %>
+    <br>
+    <% if user_signed_in? && current_user.id == c.user_id %>
+      <%= button_to "削除する", tweet_comment_path(tweet_id: @tweet.id, id: c.id), method: :delete %>
+    <% end %>
+  <% end %>
+
+</div>
 </div>

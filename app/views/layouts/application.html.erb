@@ -8,16 +8,23 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    </head>
 
   
   <body>
  <header>
+  <%= link_to root_path do %>
   <h1>MY BEST</h1>
+  <% end %>
   <div class="header-list">
    <ul>
+   <li><%= link_to "新規投稿",  new_tweet_path %></li>
     <% if user_signed_in? %>
-     <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+    <li><%= link_to "マイページへ", user_path(current_user.id) %></li>
+     
     <% else %>
      <li><%= link_to "新規登録", new_user_registration_path %></li>
      <li><%= link_to "ログイン", new_user_session_path %></li>

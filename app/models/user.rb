@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_tweets, through: :likes, source: :tweet
   has_many :tweets, dependent: :destroy # ユーザーが削除されたら、ツイートも削除されるようになります。
+  has_many :comments, dependent: :destroy
   
   validates :name, presence: true
   validates :profile, length: { maximum: 200 }
