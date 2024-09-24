@@ -14,7 +14,13 @@ class TweetsController < ApplicationController
     else
       @tweet = nil
     end
-    @comments = @tweet.comments
+  
+    if @tweet.present?
+      @comments = @tweet.comments
+    else
+      @comments = [] # 投稿がない場合は空の配列を設定
+    end
+  
     @comment = Comment.new
   end
 
