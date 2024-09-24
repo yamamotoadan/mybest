@@ -1,0 +1,55 @@
+
+
+<div class="second-block-mypage">
+
+
+    
+    <div class="yuzaname2">
+        <%= @user.name %>さん</p>
+        <br>
+        <p>ひとこと: <%= @user.profile %></p>
+    </div>
+    
+    <div class="hennsyuuroguoutiine">
+        <% if current_user.id == @user.id %>
+            <div class="item">
+                <%= link_to edit_user_registration_path, class: "btn btn btn-secondary text-white", method: :get do %>
+                    <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                <% end %>
+                <br>
+                <p>編集する</p>
+            </div>
+        <% end %>
+
+        <% if user_signed_in? %>
+            <% if current_user.id == @user.id %>
+            <div class="item">
+                <%= link_to destroy_user_session_path, class: "btn btn btn-secondary text-white", method: :delete do %>
+                    <i class="fa-solid fa-door-open" style="color: #8b4513;"></i>
+                <%end%>
+                <br>
+                <p>ログアウト</p>
+            </div>
+            <% end %>
+        <% else %>
+            <%= link_to "新規登録", new_user_registration_path %></li>
+            <%= link_to "ログイン", new_user_session_path %></li>
+        <% end %></h1>
+
+        <div class="item">
+            <%= link_to :controller => "users", :action => "iine", class: "btn btn btn-secondary text-white", method: :get do %>
+                <i class="fa-solid fa-heart-circle-plus" style="color: #ff00ff;"></i>
+            <% end %>
+            <br>
+            <p>いいね履歴</p>
+        </div>
+
+        <div class="item">
+            <%= link_to tweets_path, class: "btn btn btn-secondary text-white", method: :get do %>
+                <i class="fa-solid fa-rotate-left" style="color: #0000ff;"></i>
+            <% end %>
+            <br>
+            <p>トップページに戻る</p>
+        </div>
+    </div>
+</div>
